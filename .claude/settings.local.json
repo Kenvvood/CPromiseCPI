@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:nanobananaimg.com)",
+      "WebSearch",
+      "Bash(ipconfig)",
+      "Bash(findstr \"IPv4\")",
+      "Bash(python -m http.server 8080)",
+      "Bash(findstr \"8080\")"
+    ]
+  }
+}

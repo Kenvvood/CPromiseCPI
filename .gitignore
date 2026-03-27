@@ -1,0 +1,20 @@
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# 调试快捷方式
+Debug-ShortCut/
+
+# 临时文件
+*.tmp
+*.log
+
+# 图片素材备份（如果有需要的话）
+# images/
+
+# Netlify 部署文件夹（不需要提交，CI会处理）
+dist/

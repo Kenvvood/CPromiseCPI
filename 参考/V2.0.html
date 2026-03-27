@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>城诺科技 — 城中立诺，信满八方</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-blue': '#0066FF',
+                        'brand-blue-light': '#3390FF',
+                        'brand-green': '#00C853',
+                        'brand-green-light': '#69F0AE',
+                        'dark-bg': '#0D1117',
+                        'card-bg': '#161B22',
+                        'card-border': '#30363D',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans SC', system-ui, sans-serif; background: #0D1117; color: #E6EDF3; }
+        .brand-gradient { background: linear-gradient(135deg, #0066FF 0%, #00C853 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card { background: #161B22; border: 1px solid #30363D; transition: all 0.3s ease; }
+        .card:hover { border-color: #0066FF; transform: translateY(-4px); }
+        .btn-primary { background: linear-gradient(135deg, #0066FF, #00C853); transition: all 0.3s ease; }
+        .btn-primary:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(0, 102, 255, 0.3); }
+        .highlight-box { background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 200, 83, 0.1)); border-left: 4px solid #0066FF; }
+        .quote-mark { color: #0066FF; font-size: 4rem; line-height: 1; opacity: 0.3; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-bg/90 backdrop-blur-md border-b border-card-border">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-blue to-brand-green flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">诺</span>
+                </div>
+                <span class="text-xl font-bold brand-gradient">城诺科技</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="text-gray-400 hover:text-white transition-colors">关于我们</a>
+                <a href="#values" class="text-gray-400 hover:text-white transition-colors">核心价值</a>
+                <a href="#projects" class="text-gray-400 hover:text-white transition-colors">合作项目</a>
+                <a href="#contact" class="btn-primary px-5 py-2 rounded-lg text-white font-medium">立即咨询</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/30 mb-8">
+                <span class="w-2 h-2 bg-brand-blue rounded-full animate-pulse"></span>
+                <span class="text-brand-blue-light text-sm font-medium">专业 · 稳健 · 长期主义</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
+                <span class="brand-gradient">城中立诺</span><br>
+                <span class="text-white">信满八方</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                城诺科技，专注于量化投资与智能交易领域。<br>
+                <span class="text-gray-300">用技术创造价值，让信任驱动增长。</span>
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#projects" class="btn-primary px-8 py-4 text-white font-bold text-lg rounded-xl">探索合作项目</a>
+                <a href="#about" class="px-8 py-4 border border-gray-600 text-gray-300 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-800/50 transition-all">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-blue font-medium mb-4 block tracking-widest">ABOUT US</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">关于城诺科技</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="highlight-box p-6 rounded-xl">
+                        <p class="text-gray-300 leading-relaxed">
+                            城诺科技成立于金融科技发展的浪潮之中，致力于将<b class="text-white">成熟的量化交易策略</b>与<b class="text-white">智能化技术</b>相结合，为投资者提供专业、透明的量化投资服务。
+                        </p>
+                    </div>
+                    <div class="highlight-box p-6 rounded-xl">
+                        <p class="text-gray-300 leading-relaxed">
+                            我们坚信，<b class="text-white">长期稳健的收益</b>源于严谨的策略、专业的风控和持续的优化。每一套系统、每一个项目，都经过严格的回测与实盘验证。
+                        </p>
+                    </div>
+                    <div class="highlight-box p-6 rounded-xl">
+                        <p class="text-gray-300 leading-relaxed">
+                            "城中立诺"不仅是我们的承诺，更是我们的行动准则。在充满不确定性的市场中，<b class="text-white">以诚立身，以信为本</b>。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="card rounded-2xl p-6 text-center">
+                        <div class="text-4xl font-black text-brand-blue mb-2">5+</div>
+                        <div class="text-gray-400 text-sm">年深耕行业</div>
+                    </div>
+                    <div class="card rounded-2xl p-6 text-center">
+                        <div class="text-4xl font-black text-brand-green mb-2">1000+</div>
+                        <div class="text-gray-400 text-sm">服务客户</div>
+                    </div>
+                    <div class="card rounded-2xl p-6 text-center">
+                        <div class="text-4xl font-black text-brand-blue-light mb-2">24/7</div>
+                        <div class="text-gray-400 text-sm">自动监控系统</div>
+                    </div>
+                    <div class="card rounded-2xl p-6 text-center">
+                        <div class="text-4xl font-black text-brand-green-light mb-2">EA</div>
+                        <div class="text-gray-400 text-sm">智能交易系统</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section id="values" class="py-20 px-6 bg-card-bg/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-green font-medium mb-4 block tracking-widest">CORE VALUES</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">核心理念</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">借鉴生财有术"真诚、分享、长期主义"的理念，我们坚持与伙伴共同成长</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card rounded-2xl p-8">
+                    <div class="w-14 h-14 rounded-xl bg-brand-blue/10 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">真诚透明</h3>
+                    <p class="text-gray-400 leading-relaxed">每一笔交易可追溯，每一份收益有凭证。不画大饼，不许虚诺，用数据说话。</p>
+                </div>
+                
+                <div class="card rounded-2xl p-8">
+                    <div class="w-14 h-14 rounded-xl bg-brand-green/10 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">共创共赢</h3>
+                    <p class="text-gray-400 leading-relaxed">你盈利我分成，风险共担。伙伴的成功，才是我们的成功。</p>
+                </div>
+                
+                <div class="card rounded-2xl p-8">
+                    <div class="w-14 h-14 rounded-xl bg-brand-blue-light/10 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-brand-blue-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">长期主义</h3>
+                    <p class="text-gray-400 leading-relaxed">不追求一夜暴富，专注细水长流。用时间验证价值，用复利积累财富。</p>
+                </div>
+            </div>
+            
+            <!-- Quote -->
+            <div class="mt-16 text-center">
+                <div class="inline-block card rounded-2xl p-8 max-w-3xl">
+                    <div class="quote-mark mb-4">"</div>
+                    <p class="text-xl md:text-2xl text-gray-300 italic leading-relaxed mb-4">
+                        投资的第一性原理，是在不确定性中寻找确定性。<br>
+                        而确定性，来自于专业、纪律与时间。
+                    </p>
+                    <p class="text-brand-blue font-medium">— 城诺科技</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-blue font-medium mb-4 block tracking-widest">COOPERATION</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">合作项目</h2>
+                <p class="text-gray-400">选择适合您的合作模式，开启财富之旅</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="card rounded-3xl p-8 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-blue/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="relative">
+                        <div class="inline-block px-3 py-1 rounded-full bg-brand-blue/10 text-brand-blue text-sm font-medium mb-4">稳健型</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">稳健套利项目</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">
+                            通过跨平台点差对冲、无赠金对冲等量化策略，追求<b class="text-white">稳定可控的收益</b>。适合风险偏好适中、追求资产稳健增值的投资者。
+                        </p>
+                        
+                        <div class="space-y-3 mb-8">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">无需策略经验，团队全程托管</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">透明结算，收益数据可查</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">EA 月均收益目标 8-15%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-end justify-between">
+                            <div>
+                                <div class="text-sm text-gray-500 mb-1">利润分成比例</div>
+                                <div class="text-3xl font-black text-brand-green">50% : 50%</div>
+                                <div class="text-sm text-gray-500">您 : 团队</div>
+                            </div>
+                            <a href="#contact" class="btn-primary px-6 py-3 rounded-xl text-white font-medium">咨询详情</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 px-6 bg-card-bg/50">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-green font-medium mb-4 block tracking-widest">FAQ</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">常见问题</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="card rounded-xl p-6">
+                    <h4 class="font-bold text-white mb-2">Q: 没有投资经验可以参与吗？</h4>
+                    <p class="text-gray-400">可以。我们提供从入门到进阶的全程培训，EA 系统全自动运行，无需盯盘操作。</p>
+                </div>
+                <div class="card rounded-xl p-6">
+                    <h4 class="font-bold text-white mb-2">Q: 资金安全如何保障？</h4>
+                    <p class="text-gray-400">资金在您自己名下的交易账户中，我们仅提供 EA 策略和技术支持，不接触您的本金。</p>
+                </div>
+                <div class="card rounded-xl p-6">
+                    <h4 class="font-bold text-white mb-2">Q: 亏损了怎么办？</h4>
+                    <p class="text-gray-400">量化策略追求的是概率优势，长期执行胜率较高。但投资有风险，我们会做好风控，亏损时及时止损。</p>
+                </div>
+                <div class="card rounded-xl p-6">
+                    <h4 class="font-bold text-white mb-2">Q: 如何开始合作？</h4>
+                    <p class="text-gray-400">扫码添加微信，备注"合作咨询"，我们会安排专人对接，解答您的所有疑问。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-blue font-medium mb-4 block tracking-widest">CONTACT</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">开启合作之旅</h2>
+                <p class="text-gray-400">选择适合您的合作模式，扫码联系咨询</p>
+            </div>
+            
+            <div class="card rounded-3xl p-8 md:p-12 text-center">
+                <h3 class="text-2xl font-bold text-white mb-4">扫码添加微信</h3>
+                <p class="text-gray-400 mb-8">备注"量化合作"，第一时间获得项目详情</p>
+                
+                <div class="inline-block p-6 bg-white rounded-2xl mb-8">
+                    <div class="w-48 h-48 flex items-center justify-center">
+                        <div class="text-center">
+                            <svg class="w-24 h-24 mx-auto text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
+                            <p class="text-gray-400 text-sm">微信二维码</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#" class="btn-primary px-8 py-4 text-white font-bold text-lg rounded-xl inline-flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178A1.17 1.17 0 014.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178 1.17 1.17 0 01-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 01.598.082l1.584.926a.272.272 0 00.14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 01-.023-.156.49.49 0 01.201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.87c-.135-.004-.272-.012-.407-.012zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 01-.969.983.976.976 0 01-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 01-.969.983.976.976 0 01-.969-.983c0-.542.434-.982.969-.982z"/></svg>
+                        添加微信咨询
+                    </a>
+                </div>
+                
+                <p class="text-gray-500 text-sm mt-8">咨询时间：周一至周日 9:00 - 22:00</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-card-border">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-blue to-brand-green flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">诺</span>
+                    </div>
+                    <span class="text-xl font-bold brand-gradient">城诺科技</span>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-gray-500 text-sm">城中立诺 · 信满八方</p>
+                    <p class="text-gray-600 text-xs mt-2">免责声明：投资有风险，入市需谨慎。本页面信息仅供参考，不构成投资建议。</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener("click", function(e) {
+                e.preventDefault();
+                const t = document.querySelector(this.getAttribute("href"));
+                if (t) {
+                    t.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            });
+        });
+        
+        // Navbar background on scroll
+        window.addEventListener("scroll", () => {
+            const nav = document.querySelector("nav");
+            if (window.scrollY > 50) {
+                nav.classList.add("shadow-lg");
+            } else {
+                nav.classList.remove("shadow-lg");
+            }
+        });
+    </script>
+</body>
+</html> class="text-gray-300">EA 智能脚本全自动运行</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">专业团队全程指导</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">一次付费，终身受益</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-end justify-between">
+                            <div>
+                                <div class="text-sm text-gray-500 mb-1">项目合作费</div>
+                                <div class="text-3xl font-black text-brand-blue">¥15,800</div>
+                            </div>
+                            <a href="#contact" class="btn-primary px-6 py-3 rounded-xl text-white font-medium">咨询详情</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="card rounded-3xl p-8 relative overflow-hidden border-brand-green/50">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-green/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="relative">
+                        <div class="inline-block px-3 py-1 rounded-full bg-brand-green/10 text-brand-green text-sm font-medium mb-4">共创型</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">智能量化合作</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">
+                            <b class="text-white">您提供账户，我提供 EA</b>，利润五五分成。风险共担，收益共享。最低 2,000 USDT 起，MT4/MT5 全自动运行。
+                        </p>
+                        
+                        <div class="space-y-3 mb-8">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span

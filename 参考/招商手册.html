@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>城诺科技 — 城中立诺，信满八方</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-blue': '#0066FF',
+                        'brand-blue-light': '#3390FF',
+                        'brand-green': '#00C853',
+                        'brand-green-light': '#69F0AE',
+                        'gold': '#FFD54F',
+                        'gold-light': '#FFECB3',
+                        'dark-bg': '#0D1117',
+                        'card-bg': '#161B22',
+                        'card-border': '#30363D',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans SC', system-ui, sans-serif; background: #0D1117; color: #E6EDF3; }
+
+        /* 品牌渐变 - 蓝色+绿色 */
+        .brand-gradient { background: linear-gradient(135deg, #0066FF 0%, #00C853 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .brand-gradient-h { background: linear-gradient(90deg, #0066FF, #00C853); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* 金色渐变 - 黄金外汇主题（更亮眼） */
+        .gold-gradient {
+            background: linear-gradient(135deg, #FFF176 0%, #FFD54F 25%, #FFAB00 50%, #FFD54F 75%, #FFF176 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 8px rgba(255, 193, 7, 0.6));
+        }
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #FFF176 0%, #FFD54F 50%, #FFAB00 100%);
+        }
+        .gold-glow {
+            text-shadow: 0 0 10px rgba(255, 193, 7, 0.8), 0 0 20px rgba(255, 193, 7, 0.5), 0 0 30px rgba(255, 193, 7, 0.3);
+        }
+        .gold-border-glow {
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.4), inset 0 0 20px rgba(255, 193, 7, 0.1);
+        }
+
+        /* 章节标题增强可见性 */
+        .section-title-enhanced {
+            font-size: 2.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFFFFF 0%, #E6EDF3 50%, #FFFFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+        }
+
+        /* 标签样式 */
+        .section-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(0, 102, 255, 0.15);
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #3390FF;
+            text-transform: uppercase;
+        }
+
+        /* 标题装饰线 */
+        .title-decoration {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #0066FF, #00C853);
+            border-radius: 2px;
+            margin: 16px auto 0;
+        }
+
+        /* Ticker 滚动动画 */
+        .ticker-item { padding: 0 40px; font-family: 'Courier New', monospace; font-size: 13px; letter-spacing: 0.5px; }
+        .ticker-up { color: #00C853; }
+        .ticker-down { color: #FF4757; }
+        @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* 滚动进入动画 */
+        .slide-up { opacity: 0; transform: translateY(40px); transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+        .slide-up.animate-in { opacity: 1; transform: translateY(0); }
+        .slide-left { opacity: 0; transform: translateX(-40px); transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+        .slide-left.animate-in { opacity: 1; transform: translateX(0); }
+        .slide-right { opacity: 0; transform: translateX(40px); transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+        .slide-right.animate-in { opacity: 1; transform: translateX(0); }
+        .scale-in { opacity: 0; transform: scale(0.9); transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+        .scale-in.animate-in { opacity: 1; transform: scale(1); }
+
+        /* 卡片样式 - V2风格增强 */
+        .card {
+            background: #161B22;
+            border: 1px solid #30363D;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            border-color: #0066FF;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 102, 255, 0.15);
+        }
+        .card.border-gold:hover {
+            border-color: #FFD54F;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        /* 按钮样式 - V2质感 */
+        .btn-primary {
+            background: linear-gradient(135deg, #0066FF, #00C853);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(0, 102, 255, 0.3);
+        }
+
+        /* 高亮盒子 - V2风格 */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 200, 83, 0.1));
+            border-left: 4px solid #0066FF;
+        }
+        .highlight-box-green {
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.1), rgba(0, 200, 83, 0.05));
+            border-left: 4px solid #00C853;
+        }
+
+        /* 引用标记 */
+        .quote-mark { color: #0066FF; font-size: 4rem; line-height: 1; opacity: 0.3; }
+
+        /* 渐变边框 - V2质感 */
+        .gradient-border {
+            position: relative;
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            background: linear-gradient(135deg, #0066FF, #00C853);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            border-radius: inherit;
+            opacity: 0.5;
+        }
+
+        /* 浮动动画 - V2 */
+        .float-animation { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 发光效果 */
+        .glow-green { box-shadow: 0 0 30px rgba(0, 200, 83, 0.3); }
+
+        /* 项目卡片悬浮 - V2 */
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.15);
+        }
+
+        /* 导航栏 */
+        nav { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
+        /* 数字动画 */
+        .stat-number {
+            background: linear-gradient(135deg, #0066FF, #00C853);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 流程线 */
+        .process-line {
+            background: linear-gradient(90deg, #0066FF, #00C853);
+        }
+
+        /* 策略序号 */
+        .strategy-num {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(0, 200, 83, 0.2));
+        }
+
+        /* 科技感背景动画层 */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 内容层置于动画之上 */
+        .relative.z-10 { position: relative; z-index: 10; }
+        section > .max-w-6xl,
+        section > .max-w-4xl,
+        section > .max-w-3xl { position: relative; z-index: 10; }
+
+        /* K线动画 */
+        .kline-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        /* 电路线路背景 */
+        .circuit-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.08;
+            pointer-events: none;
+            background-image:
+                linear-gradient(90deg, #0066FF 1px, transparent 1px),
+                linear-gradient(#0066FF 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- 科技感3D背景动画 -->
+    <canvas id="bg-canvas"></canvas>
+    <canvas id="stockCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-[1]" style="opacity: 0.2;"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-bg/90 backdrop-blur-md border-b border-card-border">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-blue to-brand-green flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">诺</span>
+                </div>
+                <span class="text-xl font-bold brand-gradient">城诺科技</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="text-gray-400 hover:text-white transition-colors">关于我们</a>
+                <a href="#values" class="text-gray-400 hover:text-white transition-colors">核心价值</a>
+                <a href="#projects" class="text-gray-400 hover:text-white transition-colors">合作项目</a>
+                <a href="#contact" class="btn-primary px-5 py-2 rounded-lg text-white font-medium">立即咨询</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 relative overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none" style="z-index: 5;">
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-brand-blue/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-brand-green/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/30 mb-8">
+                <span class="w-2 h-2 bg-brand-blue rounded-full animate-pulse"></span>
+                <span class="text-brand-blue-light text-sm font-medium">专业 · 稳健 · 长期主义</span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
+                <span class="brand-gradient">城中立诺</span><br>
+                <span class="text-white">信满八方</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                城诺科技，专注于量化投资与智能交易领域。<br>
+                <span class="text-gray-300">用技术创造价值，让信任驱动增长。</span>
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#projects" class="btn-primary px-8 py-4 text-white font-bold text-lg rounded-xl">探索合作项目</a>
+                <a href="#about" class="px-8 py-4 border border-gray-600 text-gray-300 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-800/50 transition-all">了解更多</a>
+            </div>
+
+            <!-- 核心数据 -->
+            <div class="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-black stat-number">5+</div>
+                    <div class="text-gray-500 text-sm mt-1">年深耕行业</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-black stat-number">1000+</div>
+                    <div class="text-gray-500 text-sm mt-1">服务客户</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-black stat-number">24/7</div>
+                    <div class="text-gray-500 text-sm mt-1">自动监控</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-blue font-medium mb-4 block tracking-widest">ABOUT US</span>
+                <h2 class="section-title-enhanced">关于城诺科技</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="highlight-box p-6 rounded-xl">
+                        <p class="text-gray-300 leading-relaxed">
+                            城诺科技成立于金融科技发展的浪潮之中，致力于将<b class="text-white">成熟的量化交易策略</b>与<b class="text-white">智能化技术</b>相结合，为投资者提供专业、透明的量化投资服务。
+                        </p>
+                    </div>
+                    <div class="highlight-box p-6 rounded-xl">
+                        <p class="text-gray-300 leading-relaxed">
+                            我们坚信，<b class="text-white">长期稳健的收益</b>源于严谨的策略、专业的风控和持续的优化。每一套系统、每一个项目，都经过严格的回测与实盘验证。
+                        </p>
+                    </div>
+                    <div class="highlight-box-green p-6 rounded-xl">
+                        <p class="text-gray-300 leading-relaxed">
+                            "城中立诺"不仅是我们的承诺，更是我们的行动准则。在充满不确定性的市场中，<b class="text-white">以诚立身，以信为本</b>。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="card rounded-2xl p-6 text-center">
+                        <div class="text-4xl font-black text-brand-blue mb-2">EA</div>
+                        <div class="text-gray-400 text-sm">智能交易系统</div>
+                    </div>
+                    <div class="card rounded-2xl p-6 text-center">
+                        <div class="text-4xl font-black gold-gradient mb-2">50%</div>
+                        <div class="text-gray-400 text-sm">利润共赢分成</div>
+                    </div>
+                    <div class="card rounded-2xl p-6 text-center">
+                        <div class="text-4xl font-black text-brand-blue-light mb-2">24/7</div>
+                        <div class="text-gray-400 text-sm">全自动运行</div>
+                    </div>
+                    <div class="card rounded-2xl p-6 text-center">
+                        <div class="text-4xl font-black text-brand-green-light mb-2">MT4/5</div>
+                        <div class="text-gray-400 text-sm">主流平台兼容</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section id="values" class="py-20 px-6 bg-card-bg/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-green font-medium mb-4 block tracking-widest">CORE VALUES</span>
+                <h2 class="section-title-enhanced">核心理念</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">借鉴生财有术"真诚、分享、长期主义"的理念，我们坚持与伙伴共同成长</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card rounded-2xl p-8">
+                    <div class="w-14 h-14 rounded-xl bg-brand-blue/10 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">真诚透明</h3>
+                    <p class="text-gray-400 leading-relaxed">每一笔交易可追溯，每一份收益有凭证。不画大饼，不许虚诺，用数据说话。</p>
+                </div>
+
+                <div class="card rounded-2xl p-8">
+                    <div class="w-14 h-14 rounded-xl bg-brand-green/10 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">共创共赢</h3>
+                    <p class="text-gray-400 leading-relaxed">你盈利我分成，风险共担。伙伴的成功，才是我们的成功。</p>
+                </div>
+
+                <div class="card rounded-2xl p-8">
+                    <div class="w-14 h-14 rounded-xl bg-brand-blue-light/10 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-brand-blue-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">长期主义</h3>
+                    <p class="text-gray-400 leading-relaxed">不追求一夜暴富，专注细水长流。用时间验证价值，用复利积累财富。</p>
+                </div>
+            </div>
+
+            <!-- Quote -->
+            <div class="mt-16 text-center">
+                <div class="inline-block card rounded-2xl p-8 max-w-3xl">
+                    <div class="quote-mark mb-4">"</div>
+                    <p class="text-xl md:text-2xl text-gray-300 italic leading-relaxed mb-4">
+                        投资的第一性原理，是在不确定性中寻找确定性。<br>
+                        而确定性，来自于专业、纪律与时间。
+                    </p>
+                    <p class="text-brand-blue font-medium">— 城诺科技</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-blue font-medium mb-4 block tracking-widest">COOPERATION</span>
+                <h2 class="section-title-enhanced">合作项目</h2>
+                <p class="text-gray-400">选择适合您的合作模式，开启财富之旅</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Project 1: 稳健套利 -->
+                <div class="project-card card rounded-3xl p-8 relative overflow-hidden border-amber-400/40 hover:border-amber-400/60 transition-all gold-border-glow">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-amber-400/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                    <div class="absolute bottom-0 left-0 w-24 h-24 bg-amber-300/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-xl"></div>
+                    <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-gold/5 to-transparent pointer-events-none"></div>
+
+                    <div class="relative">
+                        <div class="inline-block px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-sm font-medium mb-4 border border-amber-400/30">稳健型</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">稳健套利项目</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">
+                            通过跨平台点差对冲、无赠金对冲等量化策略，追求<b class="text-white">稳定可控的收益</b>。适合风险偏好适中、追求资产稳健增值的投资者。
+                        </p>
+
+                        <div class="space-y-3 mb-8">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">无需策略经验，团队全程托管</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">透明结算，收益数据可查</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">EA 月均收益目标 8-15%</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">一次付费，终身受益</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-end justify-between">
+                            <div>
+                                <div class="text-sm text-gray-500 mb-1">项目合作费</div>
+                                <div class="text-3xl font-black gold-gradient">¥15,800</div>
+                                <div class="text-sm text-gray-500">包含策略 + 工具 + 培训</div>
+                            </div>
+                            <a href="#contact" class="btn-primary px-6 py-3 rounded-xl text-white font-medium">咨询详情</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: 智能量化 -->
+                <div class="project-card card rounded-3xl p-8 relative overflow-hidden border-brand-green/30">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-green/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="absolute bottom-0 left-0 w-24 h-24 bg-brand-blue/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+
+                    <div class="relative">
+                        <div class="inline-block px-3 py-1 rounded-full bg-brand-green/10 text-brand-green text-sm font-medium mb-4">共创型</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">智能量化合作</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">
+                            <b class="text-white">您提供账户，我提供 EA</b>，利润五五分成。风险共担，收益共享。最低 2,000 USDT 起，MT4/MT5 全自动运行。
+                        </p>
+
+                        <div class="space-y-3 mb-8">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">EA 智能脚本全自动运行</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">专业团队全程指导</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">利润五五分成，透明公开</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-300">24/7 无人值守交易</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-end justify-between">
+                            <div>
+                                <div class="text-sm text-gray-500 mb-1">利润分成比例</div>
+                                <div class="text-3xl font-black gold-gradient">50% : 50%</div>
+                                <div class="text-sm text-gray-500">您 : 团队</div>
+                            </div>
+                            <a href="#contact" class="btn-primary px-6 py-3 rounded-xl text-white font-medium">咨询详情</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategies Detail Section -->
+    <section class="py-20 px-6 bg-card-bg/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-green font-medium mb-4 block tracking-widest">STRATEGIES</span>
+                <h2 class="section-title-enhanced">四大核心策略</h2>
+                <p class="text-gray-400">多元策略布局，满足不同风险偏好</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card rounded-2xl p-6 text-center project-card">
+                    <div class="strategy-num w-14 h-14 mx-auto mb-4 rounded-xl flex items-center justify-center text-2xl font-bold text-brand-blue">1</div>
+                    <h4 class="text-lg font-bold text-white mb-2">无赠金对冲套利</h4>
+                    <p class="text-gray-400 text-sm">纯粹依靠算法信号双向持仓，赚取返佣及微小价差</p>
+                </div>
+                <div class="card rounded-2xl p-6 text-center project-card">
+                    <div class="strategy-num w-14 h-14 mx-auto mb-4 rounded-xl flex items-center justify-center text-2xl font-bold text-brand-green">2</div>
+                    <h4 class="text-lg font-bold text-white mb-2">跨平台点差套利</h4>
+                    <p class="text-gray-400 text-sm">实时监控多平台点差波动，快速捕捉无风险价差</p>
+                </div>
+                <div class="card rounded-2xl p-6 text-center project-card">
+                    <div class="strategy-num w-14 h-14 mx-auto mb-4 rounded-xl flex items-center justify-center text-2xl font-bold text-brand-blue-light">3</div>
+                    <h4 class="text-lg font-bold text-white mb-2">期货-现货对冲</h4>
+                    <p class="text-gray-400 text-sm">利用期现价差偏离构建对冲，差价回归时获取收益</p>
+                </div>
+                <div class="card rounded-2xl p-6 text-center project-card">
+                    <div class="strategy-num w-14 h-14 mx-auto mb-4 rounded-xl flex items-center justify-center text-2xl font-bold text-brand-green-light">4</div>
+                    <h4 class="text-lg font-bold text-white mb-2">赠金政策套利</h4>
+                    <p class="text-gray-400 text-sm">深度解读赠金规则，对冲交易转化为无风险利润</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-green font-medium mb-4 block tracking-widest">FAQ</span>
+                <h2 class="section-title-enhanced">常见问题</h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="card rounded-xl p-6">
+                    <h4 class="font-bold text-white mb-2">Q: 没有投资经验可以参与吗？</h4>
+                    <p class="text-gray-400">可以。我们提供从入门到进阶的全程培训，EA 系统全自动运行，无需盯盘操作。</p>
+                </div>
+                <div class="card rounded-xl p-6">
+                    <h4 class="font-bold text-white mb-2">Q: 资金安全如何保障？</h4>
+                    <p class="text-gray-400">资金在您自己名下的交易账户中，我们仅提供 EA 策略和技术支持，不接触您的本金。</p>
+                </div>
+                <div class="card rounded-xl p-6">
+                    <h4 class="font-bold text-white mb-2">Q: 亏损了怎么办？</h4>
+                    <p class="text-gray-400">量化策略追求的是概率优势，长期执行胜率较高。但投资有风险，我们会做好风控，亏损时及时止损。</p>
+                </div>
+                <div class="card rounded-xl p-6">
+                    <h4 class="font-bold text-white mb-2">Q: 如何开始合作？</h4>
+                    <p class="text-gray-400">扫码添加微信，备注"合作咨询"，我们会安排专人对接，解答您的所有疑问。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-gradient-to-b from-transparent via-brand-blue/5 to-transparent relative z-10">
+        <div class="max-w-3xl mx-auto text-center">
+            <span class="section-tag">CONTACT US</span>
+            <h2 class="section-title-enhanced" style="margin-top: 16px;">开启您的量化之旅</h2>
+            <p class="text-gray-400 mb-10">无论您是量化新手还是资深玩家，城诺科技都愿意与您深入交流，找到最适合您的量化解决方案。</p>
+
+            <div class="card rounded-2xl p-8 max-w-lg mx-auto" style="background: #161B22; border: 1px solid #30363D;">
+                <div class="space-y-4">
+                    <a href="#" class="flex items-center gap-4 p-4 rounded-xl transition-all group" style="background: rgba(0, 102, 255, 0.05);">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: rgba(0, 102, 255, 0.2);">
+                            <svg class="w-6 h-6" style="color: #0066FF;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-white font-medium">添加微信</div>
+                            <div class="text-gray-500 text-sm">chen-nuo-tech</div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="flex items-center gap-4 p-4 rounded-xl transition-all group" style="background: rgba(0, 200, 83, 0.05);">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: rgba(0, 200, 83, 0.2);">
+                            <svg class="w-6 h-6" style="color: #00C853;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-white font-medium">商务合作</div>
+                            <div class="text-gray-500 text-sm">contact@chennuotech.com</div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-6 p-4 rounded-xl" style="background: rgba(0, 102, 255, 0.05); border: 1px solid rgba(0, 102, 255, 0.2);">
+                    <p class="font-medium mb-1" style="color: #3390FF;">提示</p>
+                    <p class="text-gray-400 text-sm">由于咨询量较大，建议您备注"量化合作"，我们将在24小时内优先处理。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stock Ticker 外汇价格滚动条 -->
+    <div class="fixed bottom-0 left-0 right-0 z-40 ticker-container" style="background: linear-gradient(to top, rgba(13, 17, 23, 0.98), rgba(13, 17, 23, 0.9)); border-top: 1px solid rgba(0, 102, 255, 0.2); padding: 10px 0;">
+        <div class="ticker-wrap" id="ticker" style="display: flex; animation: tickerScroll 60s linear infinite; white-space: nowrap;"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-card-border" style="margin-bottom: 40px;">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-blue to-brand-green flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">诺</span>
+                    </div>
+                    <span class="text-xl font-bold brand-gradient">城诺科技</span>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-gray-500 text-sm">城中立诺 · 信满八方</p>
+                    <p class="text-gray-600 text-xs mt-2">免责声明：投资有风险，入市需谨慎。本页面信息仅供参考，不构成投资建议。</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener("click", function(e) {
+                e.preventDefault();
+                const t = document.querySelector(this.getAttribute("href"));
+                if (t) {
+                    t.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener("scroll", () => {
+            const nav = document.querySelector("nav");
+            if (window.scrollY > 50) {
+                nav.classList.add("shadow-lg");
+            } else {
+                nav.classList.remove("shadow-lg");
+            }
+        });
+
+        // ==========================================
+        // ==========================================
+        // Stock Wave Animation (K线波浪背景)
+        // ==========================================
+        (function() {
+            const stockCanvas = document.getElementById('stockCanvas');
+            if (!stockCanvas) return;
+            const stockCtx = stockCanvas.getContext('2d');
+
+            function resizeStock() {
+                stockCanvas.width = window.innerWidth;
+                stockCanvas.height = window.innerHeight;
+            }
+            resizeStock();
+            window.addEventListener('resize', resizeStock);
+
+            let stockOffset = 0;
+            function drawStockWave() {
+                stockCtx.clearRect(0, 0, stockCanvas.width, stockCanvas.height);
+                stockCtx.beginPath();
+                stockCtx.moveTo(0, stockCanvas.height);
+                for (let x = 0; x <= stockCanvas.width; x += 5) {
+                    const y = stockCanvas.height / 2 +
+                        Math.sin((x + stockOffset) * 0.015) * 60 +
+                        Math.sin((x + stockOffset) * 0.008) * 40 +
+                        Math.sin((x + stockOffset) * 0.003) * 20;
+                    stockCtx.lineTo(x, y);
+                }
+                stockCtx.lineTo(stockCanvas.width, stockCanvas.height);
+                stockCtx.closePath();
+                const gradient = stockCtx.createLinearGradient(0, 0, 0, stockCanvas.height);
+                gradient.addColorStop(0, 'rgba(0, 102, 255, 0.3)');
+                gradient.addColorStop(0.5, 'rgba(0, 200, 83, 0.2)');
+                gradient.addColorStop(1, 'rgba(0, 102, 255, 0.1)');
+                stockCtx.fillStyle = gradient;
+                stockCtx.fill();
+                stockOffset += 1;
+                requestAnimationFrame(drawStockWave);
+            }
+            drawStockWave();
+        })();
+
+        // ==========================================
+        // Stock Ticker (外汇价格滚动条)
+        // ==========================================
+        (function() {
+            const tickerData = [
+                { symbol: 'XAU/USD 金', price: 2345.80, change: 12.40 },
+                { symbol: 'XAG/USD 银', price: 29.45, change: -0.23 },
+                { symbol: 'EUR/USD 欧美', price: 1.0842, change: -0.0023 },
+                { symbol: 'GBP/USD 镑美', price: 1.2654, change: 0.0045 },
+                { symbol: 'USD/JPY 美日', price: 154.32, change: -0.18 },
+                { symbol: 'AUD/USD 澳美', price: 0.6542, change: 0.0012 },
+                { symbol: 'USD/CHF 美瑞', price: 0.8923, change: -0.0015 },
+                { symbol: 'NZD/USD 纽美', price: 0.6028, change: 0.0028 },
+                { symbol: 'BTC/USD 比特币', price: 67845.00, change: 1256.50 },
+                { symbol: 'ETH/USD 以太坊', price: 3524.67, change: 78.23 },
+                { symbol: 'S&P 500', price: 5234.18, change: 15.42 },
+                { symbol: 'NASDAQ', price: 16428.82, change: -23.56 },
+            ];
+
+            const tickerWrap = document.getElementById('ticker');
+            if (!tickerWrap) return;
+
+            function updateTicker() {
+                tickerData.forEach(stock => {
+                    stock.price += (Math.random() - 0.5) * (stock.price * 0.001);
+                    stock.change += (Math.random() - 0.5) * 0.1;
+                });
+
+                const tickerContent = tickerData.map(stock => {
+                    const cls = stock.change >= 0 ? 'ticker-up' : 'ticker-down';
+                    const sign = stock.change >= 0 ? '▲ +' : '▼ ';
+                    const priceStr = stock.price < 10 ? stock.price.toFixed(4) : stock.price.toFixed(2);
+                    const changeStr = Math.abs(stock.change).toFixed(2);
+                    return `<span class="ticker-item ${cls}">${stock.symbol}: $${priceStr} (${sign}${changeStr}%)</span>`;
+                }).join('');
+
+                tickerWrap.innerHTML = tickerContent + tickerContent;
+            }
+
+            updateTicker();
+            setInterval(updateTicker, 3000);
+        })();
+
+        // ==========================================
+        // Scroll Animation (滚动进入动画)
+        // ==========================================
+        (function() {
+            const staggerObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('animate-in');
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('section > div').forEach(el => {
+                el.classList.add('slide-up');
+                staggerObserver.observe(el);
+            });
+        })();
+
+        // 科技感3D背景动画 - Canvas Animation
+        // ==========================================
+        (function() {
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+
+            let width, height;
+            let particles = [];
+            let klines = [];
+            let circuitLines = [];
+
+            // 颜色配置
+            const colors = {
+                blue: '#0066FF',
+                green: '#00C853',
+                blueRgba: '0, 102, 255',
+                greenRgba: '0, 200, 83'
+            };
+
+            // 初始化画布尺寸
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+
+            // 粒子类 - 星空/数据流效果
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.5;
+                    this.speedY = (Math.random() - 0.5) * 0.5;
+                    this.color = Math.random() > 0.5 ? colors.blue : colors.green;
+                    this.alpha = Math.random() * 0.5 + 0.1;
+                    this.pulse = Math.random() * Math.PI * 2;
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    this.pulse += 0.02;
+
+                    // 边界检测
+                    if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                        this.reset();
+                    }
+                }
+
+                draw() {
+                    const a = this.alpha * (0.5 + 0.5 * Math.sin(this.pulse));
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.globalAlpha = a;
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
+            }
+
+            // K线类 - 股票波动效果
+            class KLine {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * width;
+                    this.baseHeight = Math.random() * 100 + 50;
+                    this.height = this.baseHeight;
+                    this.width = Math.random() * 8 + 4;
+                    this.growth = (Math.random() - 0.3) * 2; // 偏向上涨
+                    this.alpha = Math.random() * 0.3 + 0.1;
+                    this.isGreen = Math.random() > 0.3; // 大部分K线是绿色
+                }
+
+                update() {
+                    this.height += this.growth;
+
+                    // 随机波动
+                    this.growth += (Math.random() - 0.5) * 1;
+                    this.growth *= 0.98; // 阻尼
+
+                    // 限制范围
+                    if (this.height < 20) {
+                        this.height = 20;
+                        this.growth = Math.abs(this.growth);
+                    }
+                    if (this.height > this.baseHeight + 80) {
+                        this.height = this.baseHeight + 80;
+                        this.growth = -Math.abs(this.growth);
+                    }
+                }
+
+                draw() {
+                    const color = this.isGreen ? colors.green : colors.blue;
+                    const gradient = ctx.createLinearGradient(this.x, height, this.x, height - this.height);
+                    gradient.addColorStop(0, color);
+                    gradient.addColorStop(1, 'transparent');
+
+                    ctx.fillStyle = gradient;
+                    ctx.globalAlpha = this.alpha;
+                    ctx.fillRect(this.x - this.width/2, height - this.height, this.width, this.height);
+                    ctx.globalAlpha = 1;
+                }
+            }
+
+            // 电路线路类 - 芯片/线路效果
+            class CircuitLine {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.length = Math.random() * 100 + 50;
+                    this.angle = Math.random() > 0.5 ? 0 : Math.PI / 2; // 水平或垂直
+                    this.speed = Math.random() * 2 + 1;
+                    this.progress = 0;
+                    this.alpha = Math.random() * 0.3 + 0.1;
+                    this.color = Math.random() > 0.5 ? colors.blue : colors.green;
+                }
+
+                update() {
+                    this.progress += this.speed;
+                    if (this.progress > this.length) {
+                        this.reset();
+                    }
+                }
+
+                draw() {
+                    const startX = this.x;
+                    const startY = this.y;
+                    const endX = startX + (this.angle === 0 ? this.progress : 0);
+                    const endY = startY + (this.angle === Math.PI / 2 ? this.progress : 0);
+
+                    // 画线
+                    ctx.beginPath();
+                    ctx.moveTo(startX, startY);
+                    ctx.lineTo(endX, endY);
+                    ctx.strokeStyle = this.color;
+                    ctx.globalAlpha = this.alpha * (1 - this.progress / this.length);
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // 画光点
+                    if (this.progress > 10 && this.progress < this.length - 10) {
+                        ctx.beginPath();
+                        ctx.arc(endX, endY, 2, 0, Math.PI * 2);
+                        ctx.fillStyle = '#fff';
+                        ctx.globalAlpha = this.alpha;
+                        ctx.fill();
+                    }
+
+                    ctx.globalAlpha = 1;
+                }
+            }
+
+            // 初始化
+            function init() {
+                resize();
+
+                // 创建粒子
+                particles = [];
+                const particleCount = Math.min(150, Math.floor((width * height) / 10000));
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+
+                // 创建K线
+                klines = [];
+                const klineCount = Math.min(60, Math.floor(width / 30));
+                for (let i = 0; i < klineCount; i++) {
+                    const kline = new KLine();
+                    kline.x = (width / klineCount) * i;
+                    kline.height = Math.random() * 150 + 50;
+                    kline.baseHeight = kline.height;
+                    klines.push(kline);
+                }
+
+                // 创建电路线路
+                circuitLines = [];
+                const circuitCount = Math.min(20, Math.floor((width * height) / 80000));
+                for (let i = 0; i < circuitCount; i++) {
+                    circuitLines.push(new CircuitLine());
+                }
+            }
+
+            // 动画循环
+            function animate() {
+                // 清除画布（带渐变淡化，产生拖尾效果）
+                ctx.fillStyle = 'rgba(13, 17, 23, 0.1)';
+                ctx.fillRect(0, 0, width, height);
+
+                // 绘制粒子
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+
+                // 绘制K线
+                klines.forEach(k => {
+                    k.update();
+                    k.draw();
+                });
+
+                // 绘制电路线路
+                circuitLines.forEach(c => {
+                    c.update();
+                    c.draw();
+                });
+
+                // 绘制连接线（粒子之间）
+                ctx.strokeStyle = `rgba(${colors.blueRgba}, 0.1)`;
+                ctx.lineWidth = 0.5;
+                particles.forEach((p1, i) => {
+                    particles.slice(i + 1).forEach(p2 => {
+                        const dx = p1.x - p2.x;
+                        const dy = p1.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120) {
+                            ctx.globalAlpha = (1 - dist / 120) * 0.3;
+                            ctx.beginPath();
+                            ctx.moveTo(p1.x, p1.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                            ctx.globalAlpha = 1;
+                        }
+                    });
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            // 事件监听
+            window.addEventListener('resize', () => {
+                resize();
+                init();
+            });
+
+            // 启动
+            init();
+            animate();
+        })();
+    </script>
+</body>
+</html>

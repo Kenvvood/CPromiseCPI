@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>城诺科技 — 城中立诺，信满八方</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-blue': '#0066FF',
+                        'brand-blue-light': '#3390FF',
+                        'brand-green': '#00C853',
+                        'brand-green-light': '#69F0AE',
+                        'dark-bg': '#0D1117',
+                        'card-bg': '#161B22',
+                        'card-border': '#30363D',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* ==================== V4.0 Enhanced Styles ==================== */
+        /* 3D Background Canvas */
+        .bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        #circuitCanvas { opacity: 0.4; }
+        #stockCanvas { opacity: 0.25; }
+        #gridCanvas { opacity: 0.15; }
+        #particleCanvas { opacity: 0.5; }
+        
+        /* 3D Perspective & Float */
+        .perspective-container { perspective: 1200px; transform-style: preserve-3d; }
+        .float-3d { animation: float3d 8s ease-in-out infinite; transform-style: preserve-3d; }
+        @keyframes float3d {
+            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+            25% { transform: translateY(-15px) rotateX(3deg) rotateY(2deg); }
+            50% { transform: translateY(-8px) rotateX(0deg) rotateY(-2deg); }
+            75% { transform: translateY(-20px) rotateX(-2deg) rotateY(1deg); }
+        }
+        
+        /* Glow Pulse Effect */
+        .glow-pulse { animation: glowPulse 3s ease-in-out infinite; }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 25px rgba(0, 102, 255, 0.4), 0 0 50px rgba(0, 102, 255, 0.15); }
+            50% { box-shadow: 0 0 50px rgba(0, 102, 255, 0.6), 0 0 100px rgba(0, 200, 83, 0.25); }
+        }
+        
+        /* Tech Grid Background */
+        .tech-grid {
+            position: fixed; inset: 0; z-index: 1; pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(0, 102, 255, 0.04) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(0, 102, 255, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 30s linear infinite;
+        }
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+        
+        /* Hexagon Pattern */
+        .hexagon-bg {
+            position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill='%230066FF'%3E%3Cpolygon points='14 0 28 8.15 28 24.5 14 32.65 0 24.5 0 8.15'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Scan Line Effect */
+        .scan-line {
+            position: fixed; width: 100%; height: 2px; top: 0; left: 0; z-index: 1000; pointer-events: none;
+            background: linear-gradient(90deg, transparent, rgba(0, 102, 255, 0.5), transparent);
+            animation: scanMove 8s ease-in-out infinite;
+        }
+        @keyframes scanMove {
+            0% { top: -2px; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        
+        /* Circuit Nodes */
+        .circuit-node {
+            position: fixed; width: 8px; height: 8px; background: #0066FF; border-radius: 50%; z-index: 2; pointer-events: none;
+            animation: nodePulse 2s ease-in-out infinite;
+        }
+        .circuit-node::before {
+            content: ''; position: absolute; inset: -4px; border: 2px solid currentColor; border-radius: 50%;
+            animation: nodeRing 2s ease-out infinite;
+        }
+        @keyframes nodePulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.7; }
+        }
+        @keyframes nodeRing {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        
+        /* Morphing Shapes */
+        .morph-shape {
+            position: fixed; z-index: 1; pointer-events: none; opacity: 0.08;
+            animation: morphFloat 20s ease-in-out infinite;
+        }
+        @keyframes morphFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            33% { transform: translate(40px, -40px) rotate(120deg) scale(1.15); }
+            66% { transform: translate(-30px, 30px) rotate(240deg) scale(0.85); }
+        }
+        
+        /* Wave Effect */
+        .wave-container { position: fixed; bottom: 0; left: 0; width: 100%; height: 200px; z-index: 1; pointer-events: none; opacity: 0.12; }
+        .wave { position: absolute; bottom: 0; left: 0; width: 200%; height: 100%; background-size: 50% 100%; animation: waveMove 20s linear infinite; }
+        .wave-blue { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%230066FF' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,138.7C672,128,768,160,864,186.7C960,213,1056,235,1152,218.7C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") repeat-x; }
+        .wave-green { bottom: 15px; opacity: 0.6; animation: waveMove 15s linear infinite reverse; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%2300C853' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,218.7C672,235,768,245,864,234.7C960,224,1056,192,1152,181.3C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") repeat-x; }
+        @keyframes waveMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        
+        /* Stock Ticker */
+        .ticker-container {
+            position: fixed; bottom: 0; left: 0; right: 0; overflow: hidden; z-index: 999; pointer-events: none;
+            background: linear-gradient(to top, rgba(13, 17, 23, 0.98), transparent); padding: 12px 0; border-top: 1px solid rgba(0, 102, 255, 0.2);
+        }
+        .ticker-wrap { display: flex; animation: tickerScroll 60s linear infinite; white-space: nowrap; }
+        .ticker-item { padding: 0 40px; font-family: 'Courier New', monospace; font-size: 13px; letter-spacing: 0.5px; }
+        .ticker-up { color: #00C853; }
+        .ticker-down { color: #FF4757; }
+        @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        
+        /* Base Styles */
+        body { font-family: 'Noto Sans SC', system-ui, sans-serif; background: linear-gradient(135deg, #0D1117 0%, #1a1f2e 50%, #0D1117 100%); color: #E6EDF3; }
+        .brand-gradient { background: linear-gradient(135deg, #0066FF 0%, #00C853 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card { background: #161B22; border: 1px solid #30363D; transition: all 0.3s ease; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 102, 255, 0.2), 0 0 30px rgba(0, 200, 83, 0.1); border-color: rgba(0, 102, 255, 0.3); }
+        
+        /* V4.0 Enhanced Hover Effects */
+        .card-3d-hover { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
+        .card-3d-hover:hover { 
+            transform: translateY(-10px) rotateX(2deg) rotateY(-2deg); 
+            box-shadow: 0 25px 50px rgba(0, 102, 255, 0.25), 0 0 40px rgba(0, 200, 83, 0.15); 
+        }
+        
+        /* Glitch Effect on Hover */
+        .glitch-hover { position: relative; overflow: hidden; }
+        .glitch-hover::before, .glitch-hover::after {
+            content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .glitch-hover:hover::before { animation: glitch1 0.3s; color: #0066FF; }
+        .glitch-hover:hover::after { animation: glitch2 0.3s; color: #00C853; }
+        @keyframes glitch1 { 0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); opacity: 0.8; } 20% { clip-path: inset(20% 0 60% 0); transform: translate(-3px, 2px); } 40% { clip-path: inset(40% 0 30% 0); transform: translate(3px, -2px); } 60% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 1px); } 80% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -1px); } }
+        @keyframes glitch2 { 0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); opacity: 0.8; } 20% { clip-path: inset(10% 0 70% 0); transform: translate(3px, -2px); } 40% { clip-path: inset(50% 0 40% 0); transform: translate(-3px, 2px); } 60% { clip-path: inset(30% 0 50% 0); transform: translate(2px, -1px); } 80% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 1px); } }
+        
+        /* Shimmer Effect */
+        .shimmer { position: relative; overflow: hidden; }
+        .shimmer::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
+            transform: rotate(30deg); animation: shimmer 6s infinite;
+        }
+        @keyframes shimmer { 0% { transform: translateX(-100%) rotate(30deg); } 100% { transform: translateX(100%) rotate(30deg); } }
+        
+        /* Ripple Effect */
+        .ripple { position: relative; overflow: hidden; }
+        .ripple::before {
+            content: ''; position: absolute; border-radius: 50%; background: rgba(255,255,255,0.3);
+            width: 100px; height: 100px; transform: scale(0); opacity: 1;
+            animation: rippleAnim 0.8s ease-out; pointer-events: none;
+        }
+        @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+        
+        /* Magnetic Button Effect */
+        .magnetic-btn { transition: transform 0.2s ease-out; }
+        .magnetic-btn:hover { transform: scale(1.08); }
+        
+        /* Counter Animation */
+        .counter { transition: all 0.3s; }
+        .counter:hover { text-shadow: 0 0 20px currentColor; }
+        
+        /* Nav Active State */
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+            background: linear-gradient(90deg, #0066FF, #00C853); transition: width 0.3s;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        
+        /* Mobile Nav Styles */
+        .mobile-menu {
+            position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+            background: rgba(13, 17, 23, 0.98); backdrop-filter: blur(20px);
+            padding: 2rem; transform: translateX(-100%); transition: transform 0.3s ease;
+            z-index: 40;
+        }
+        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu a { display: block; padding: 1rem 0; font-size: 1.25rem; border-bottom: 1px solid rgba(48, 54, 61, 0.5); }
+        .hamburger span { display: block; width: 24px; height: 2px; background: #E6EDF3; margin: 6px 0; transition: all 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+        .btn-primary { background: linear-gradient(135deg, #0066FF, #00C853); transition: all 0.3s ease; }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(0, 102, 255, 0.4), 0 0 40px rgba(0, 200, 83, 0.2); }
+        .glow-button { box-shadow: 0 0 30px rgba(0, 102, 255, 0.4); }
+        .glow-button:hover { box-shadow: 0 0 50px rgba(0, 102, 255, 0.6), 0 0 20px rgba(0, 200, 83, 0.3); transform: scale(1.05); }
+        .gradient-border { position: relative; }
+        .gradient-border::before { content: ''; position: absolute; inset: 0; padding: 2px; background: linear-gradient(135deg, #0066FF, #00C853, #0066FF); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; border-radius: inherit; }
+        .float-animation { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .particle { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; }
+        .highlight-box { background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 200, 83, 0.1)); border-left: 4px solid #0066FF; }
+        .quote-mark { color: #0066FF; font-size: 4rem; line-height: 1; opacity: 0.3; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- ==================== V4.0 Canvas Background Layers ==================== -->
+    <canvas id="circuitCanvas" class="bg-canvas"></canvas>
+    <canvas id="stockCanvas" class="bg-canvas"></canvas>
+    <canvas id="particleCanvas" class="bg-canvas"></canvas>
+    
+    <!-- Tech Grid & Hexagon Overlay -->
+    <div class="tech-grid"></div>
+    <div class="hexagon-bg"></div>
+    
+    <!-- Morphing Geometric Shapes -->
+    <svg class="morph-shape" style="top: 8%; left: 3%; width: 250px;" viewBox="0 0 200 200">
+        <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#0066FF;stop-opacity:0.7" />
+                <stop offset="100%" style="stop-color:#00C853;stop-opacity:0.25" />
+            </linearGradient>
+        </defs>
+        <path fill="url(#grad1)" d="M100,10 L180,50 L180,150 L100,190 L20,150 L20,50 Z" />
+    </svg>
+    <svg class="morph-shape" style="bottom: 25%; right: 5%; width: 180px; animation-delay: -8s;" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="45" fill="none" stroke="#0066FF" stroke-width="0.8" opacity="0.6"/>
+        <circle cx="50" cy="50" r="35" fill="none" stroke="#00C853" stroke-width="0.6" opacity="0.5"/>
+        <circle cx="50" cy="50" r="25" fill="none" stroke="#0066FF" stroke-width="0.5" opacity="0.4"/>
+    </svg>
+    
+    <!-- Wave Effect -->
+    <div class="wave-container">
+        <div class="wave wave-blue"></div>
+        <div class="wave wave-green"></div>
+    </div>
+    
+    <!-- Scan Line Effect -->
+    <div class="scan-line"></div>
+    
+    <!-- Circuit Nodes -->
+    <div class="circuit-node" style="top: 15%; left: 10%; color: #0066FF;"></div>
+    <div class="circuit-node" style="top: 30%; right: 14%; color: #00C853; animation-delay: 0.5s;"></div>
+    <div class="circuit-node" style="top: 55%; left: 8%; color: #3390FF; animation-delay: 1s;"></div>
+    <div class="circuit-node" style="top: 75%; right: 18%; color: #69F0AE; animation-delay: 1.5s;"></div>
+    <div class="circuit-node" style="top: 40%; left: 20%; color: #0066FF; animation-delay: 0.75s;"></div>
+    <div class="circuit-node" style="top: 88%; left: 25%; color: #00C853; animation-delay: 1.25s;"></div>
+    <div class="circuit-node" style="top: 18%; left: 50%; color: #3390FF; animation-delay: 1.75s;"></div>
+    <div class="circuit-node" style="top: 68%; left: 88%; color: #69F0AE; animation-delay: 0.25s;"></div>
+
+    <!-- Stock Ticker -->
+    <div class="ticker-container">
+        <div class="ticker-wrap" id="ticker"></div>
+    </div>
+
+    <!-- Original Particles -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="particle top-1/4 left-1/4 w-2 h-2 bg-brand-blue rounded-full opacity-20 float-animation"></div>
+        <div class="particle top-1/3 right-1/4 w-3 h-3 bg-brand-green rounded-full opacity-15 float-animation" style="animation-delay: 2s;"></div>
+        <div class="particle bottom-1/4 left-1/3 w-2 h-2 bg-brand-blue-light rounded-full opacity-25 float-animation" style="animation-delay: 4s;"></div>
+    </div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-bg/90 backdrop-blur-xl border-b border-card-border/50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-blue to-brand-green flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">诺</span>
+                </div>
+                <span class="text-xl font-bold brand-gradient">城诺科技</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="text-gray-400 hover:text-white transition-colors">关于我们</a>
+                <a href="#values" class="text-gray-400 hover:text-white transition-colors">核心价值</a>
+                <a href="#projects" class="text-gray-400 hover:text-white transition-colors">合作项目</a>
+                <a href="#contact" class="btn-primary px-5 py-2 rounded-lg text-white font-medium">立即咨询</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button class="hamburger md:hidden" id="mobileToggle" aria-label="菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#about" class="text-gray-300 hover:text-white transition-colors">关于我们</a>
+            <a href="#values" class="text-gray-300 hover:text-white transition-colors">核心价值</a>
+            <a href="#projects" class="text-gray-300 hover:text-white transition-colors">合作项目</a>
+            <a href="#contact" class="text-brand-blue font-semibold">立即咨询</a>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-20 px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/30 mb-8">
+                <span class="w-2 h-2 bg-brand-blue rounded-full animate-pulse"></span>
+                <span class="text-brand-blue-light text-sm font-medium">专业 · 稳健 · 长期主义</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
+                <span class="brand-gradient">城中立诺</span><br>
+                <span class="text-white">信满八方</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                城诺科技，专注于量化投资与智能交易领域。<br>
+                <span class="text-gray-300">用技术创造价值，让信任驱动增长。</span>
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#projects" class="glow-button btn-primary px-8 py-4 text-white font-bold text-lg rounded-xl">探索合作项目</a>
+                <a href="#about" class="px-8 py-4 border border-brand-blue/50 text-brand-blue font-semibold rounded-xl hover:bg-brand-blue/10 transition-all">了解更多</a>
+            </div>
+            <div class="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
+                <div class="text-center card rounded-2xl p-6 card-hover">
+                    <div class="text-3xl md:text-4xl font-black brand-gradient mb-2">5+</div>
+                    <div class="text-gray-500 text-sm mt-1">年深耕行业</div>
+                </div>
+                <div class="text-center card rounded-2xl p-6 card-hover">
+                    <div class="text-3xl md:text-4xl font-black brand-gradient mb-2">1000+</div>
+                    <div class="text-gray-500 text-sm mt-1">服务客户</div>
+                </div>
+                <div class="text-center card rounded-2xl p-6 card-hover">
+                    <div class="text-3xl md:text-4xl font-black brand-gradient mb-2">24/7</div>
+                    <div class="text-gray-500 text-sm mt-1">自动监控系统</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-blue font-medium mb-4 block tracking-widest">ABOUT US</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">关于城诺科技</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="highlight-box p-6 rounded-xl card-hover">
+                        <p class="text-gray-300 leading-relaxed">城诺科技成立于金融科技发展的浪潮之中，致力于将<b class="text-white">成熟的量化交易策略</b>与<b class="text-white">智能化技术</b>相结合，为投资者提供专业、透明的量化投资服务。</p>
+                    </div>
+                    <div class="highlight-box p-6 rounded-xl card-hover">
+                        <p class="text-gray-300 leading-relaxed">我们坚信，<b class="text-white">长期稳健的收益</b>源于严谨的策略、专业的风控和持续的优化。每一套系统、每一个项目，都经过严格的回测与实盘验证。</p>
+                    </div>
+                    <div class="highlight-box p-6 rounded-xl card-hover">
+                        <p class="text-gray-300 leading-relaxed">"城中立诺"不仅是我们的承诺，更是我们的行动准则。在充满不确定性的市场中，<b class="text-white">以诚立身，以信为本</b>。</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="card rounded-2xl p-6 text-center card-hover"><div class="text-4xl font-black text-brand-blue mb-2">5+</div><div class="text-gray-400 text-sm">年深耕行业</div></div>
+                    <div class="card rounded-2xl p-6 text-center card-hover"><div class="text-4xl font-black text-brand-green mb-2">1000+</div><div class="text-gray-400 text-sm">服务客户</div></div>
+                    <div class="card rounded-2xl p-6 text-center card-hover"><div class="text-4xl font-black text-brand-blue-light mb-2">24/7</div><div class="text-gray-400 text-sm">自动监控系统</div></div>
+                    <div class="card rounded-2xl p-6 text-center card-hover"><div class="text-4xl font-black text-brand-green-light mb-2">EA</div><div class="text-gray-400 text-sm">智能交易系统</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="values" class="py-20 px-6 bg-gradient-to-b from-transparent via-brand-blue/5 to-transparent relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-green font-medium mb-4 block tracking-widest">CORE VALUES</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">核心理念</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">借鉴生财有术"真诚、分享、长期主义"的理念，我们坚持与伙伴共同成长</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 rounded-xl bg-brand-blue/10 flex items-center justify-center mb-6"><svg class="w-7 h-7 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-3">真诚透明</h3>
+                    <p class="text-gray-400 leading-relaxed">每一笔交易可追溯，每一份收益有凭证。不画大饼，不许虚诺，用数据说话。</p>
+                </div>
+                <div class="card rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 rounded-xl bg-brand-green/10 flex items-center justify-center mb-6"><svg class="w-7 h-7 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-3">共创共赢</h3>
+                    <p class="text-gray-400 leading-relaxed">你盈利我分成，风险共担。伙伴的成功，才是我们的成功。</p>
+                </div>
+                <div class="card rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 rounded-xl bg-brand-blue-light/10 flex items-center justify-center mb-6"><svg class="w-7 h-7 text-brand-blue-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-3">长期主义</h3>
+                    <p class="text-gray-400 leading-relaxed">不追求一夜暴富，专注细水长流。用时间验证价值，用复利积累财富。</p>
+                </div>
+            </div>
+            <div class="mt-16 text-center">
+                <div class="inline-block card rounded-2xl p-8 max-w-3xl card-hover">
+                    <div class="quote-mark mb-4">"</div>
+                    <p class="text-xl md:text-2xl text-gray-300 italic leading-relaxed mb-4">投资的第一性原理，是在不确定性中寻找确定性。<br>而确定性，来自于专业、纪律与时间。</p>
+                    <p class="text-brand-blue font-medium">— 城诺科技</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-blue font-medium mb-4 block tracking-widest">COOPERATION</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">合作项目</h2>
+                <p class="text-gray-400">选择适合您的合作模式，开启财富之旅</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card rounded-3xl p-8 relative overflow-hidden card-hover">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-blue/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="relative">
+                        <div class="inline-block px-3 py-1 rounded-full bg-brand-blue/10 text-brand-blue text-sm font-medium mb-4">稳健型</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">稳健套利项目</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">通过跨平台点差对冲、无赠金对冲等量化策略，追求<b class="text-white">稳定可控的收益</b>。适合风险偏好适中、追求资产稳健增值的投资者。</p>
+                        <div class="space-y-3 mb-8">
+                            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>月化收益 3%-8%</span></div>
+                            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>回撤控制在 5% 以内</span></div>
+                            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>全天候自动运行</span></div>
+                            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>实时收益推送</span></div>
+                        </div>
+                        <a href="#contact" class="glow-button btn-primary block text-center py-3 rounded-xl text-white font-bold">预约咨询</a>
+                    </div>
+                </div>
+                
+                <div class="card rounded-3xl p-8 relative overflow-hidden card-hover">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-green/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="relative">
+                        <div class="inline-block px-3 py-1 rounded-full bg-brand-green/10 text-brand-green text-sm font-medium mb-4">进取型</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">EA智能跟单系统</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">使用经过实盘验证的量化EA交易系统，<b class="text-white">全自动执行交易策略</b>，24/7实时监控，零情绪干扰，追求长期稳健增长。</p>
+                        <div class="space-y-3 mb-8">
+                            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-blue flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>年化收益 15%-50%</span></div>
+                            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-blue flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>最大回撤可控</span></div>
+                            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-blue flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>手机端实时查看</span></div>
+                            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-blue flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>一键启动</span></div>
+                        </div>
+                        <a href="#contact" class="block text-center py-3 rounded-xl border border-brand-green/50 text-brand-green font-bold hover:bg-brand-green/10 transition-all">预约咨询</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Trust Badge -->
+            <div class="mt-12 card rounded-2xl p-8 text-center card-hover">
+                <div class="flex flex-wrap justify-center gap-8 mb-6">
+                    <div class="flex items-center gap-2 text-gray-400">
+                        <svg class="w-5 h-5 text-brand-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span>资金安全</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-gray-400">
+                        <svg class="w-5 h-5 text-brand-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span>策略透明</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-gray-400">
+                        <svg class="w-5 h-5 text-brand-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                        <span>长期陪伴</span>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-sm">城诺科技 — 城中立诺，信满八方</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-gradient-to-b from-transparent via-brand-blue/5 to-transparent relative z-10">
+        <div class="max-w-3xl mx-auto text-center">
+            <span class="text-brand-blue font-medium mb-4 block tracking-widest">CONTACT US</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">开启您的量化之旅</h2>
+            <p class="text-gray-400 mb-10">无论您是量化新手还是资深玩家，城诺科技都愿意与您深入交流，找到最适合您的量化解决方案。</p>
+            
+            <div class="card rounded-2xl p-8 max-w-lg mx-auto card-hover">
+                <div class="space-y-4">
+                    <a href="#" class="flex items-center gap-4 p-4 rounded-xl bg-brand-blue/5 hover:bg-brand-blue/10 transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-blue/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-white font-medium">添加微信</div>
+                            <div class="text-gray-500 text-sm">chen-nuo-tech</div>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="flex items-center gap-4 p-4 rounded-xl bg-brand-green/5 hover:bg-brand-green/10 transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-green/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-white font-medium">商务合作</div>
+                            <div class="text-gray-500 text-sm">contact@chennuotech.com</div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="mt-6 p-4 rounded-xl bg-brand-blue/5 border border-brand-blue/20">
+                    <p class="text-brand-blue-light font-medium mb-1">提示</p>
+                    <p class="text-gray-400 text-sm">由于咨询量较大，建议您备注"量化合作"，我们将在24小时内优先处理。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 border-t border-card-border/50 relative z-10">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-blue to-brand-green flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">诺</span>
+                </div>
+                <span class="font-bold brand-gradient">城诺科技</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-2">城中立诺，信满八方</p>
+            <p class="text-gray-600 text-xs">2024 城诺科技 ChenNuoTech. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.card, .highlight-box').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('open');
+                    hamburger.classList.remove('open');
+                }
+            });
+        });
+        
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const hamburger = document.querySelector('.hamburger');
+        
+        mobileToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            hamburger.classList.toggle('open');
+        });
+        
+        // Enhanced Scroll Animations with Stagger
+        const staggerObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = `${index * 0.1}s`;
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+        
+        // Add slide-in animation classes
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+            .slide-up { opacity: 0; transform: translateY(40px); transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+            .slide-up.animate-in { opacity: 1; transform: translateY(0); }
+            .slide-left { opacity: 0; transform: translateX(-40px); transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+            .slide-left.animate-in { opacity: 1; transform: translateX(0); }
+            .slide-right { opacity: 0; transform: translateX(40px); transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+            .slide-right.animate-in { opacity: 1; transform: translateX(0); }
+            .scale-in { opacity: 0; transform: scale(0.9); transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+            .scale-in.animate-in { opacity: 1; transform: scale(1); }
+        `;
+        document.head.appendChild(styleSheet);
+        
+        // Apply animation classes
+        document.querySelectorAll('section > div > div').forEach(el => {
+            el.classList.add('slide-up');
+            staggerObserver.observe(el);
+        });
+        
+        // Nav Background on Scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(13, 17, 23, 0.98)';
+                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
+            } else {
+                nav.style.background = 'rgba(13, 17, 23, 0.9)';
+                nav.style.boxShadow = 'none';
+            }
+        });
+        
+        // Parallax Effect for Sections
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            document.querySelectorAll('.morph-shape').forEach((shape, i) => {
+                const speed = 0.05 + (i * 0.02);
+                shape.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+        
+        // Counter Animation on View
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+            
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    counter.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            
+            const counterObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    updateCounter();
+                    counterObserver.unobserve(counter);
+                }
+            }, { threshold: 0.5 });
+            counterObserver.observe(counter);
+        });
+        // ==================== V4.0 Canvas Animations ====================
+        
+        // Circuit Board Animation
+        const circuitCanvas = document.getElementById('circuitCanvas');
+        const circuitCtx = circuitCanvas.getContext('2d');
+        function resizeCircuit() { circuitCanvas.width = window.innerWidth; circuitCanvas.height = window.innerHeight; }
+        resizeCircuit(); window.addEventListener('resize', resizeCircuit);
+        
+        const circuitNodes = [];
+        for (let i = 0; i < 30; i++) {
+            circuitNodes.push({ 
+                x: Math.random() * window.innerWidth, 
+                y: Math.random() * window.innerHeight, 
+                vx: (Math.random() - 0.5) * 0.6, 
+                vy: (Math.random() - 0.5) * 0.6 
+            });
+        }
+        
+        function drawCircuit() {
+            circuitCtx.clearRect(0, 0, circuitCanvas.width, circuitCanvas.height);
+            
+            // Draw connections
+            circuitCtx.strokeStyle = 'rgba(0, 102, 255, 0.12)';
+            circuitCtx.lineWidth = 1;
+            for (let i = 0; i < circuitNodes.length; i++) {
+                for (let j = i + 1; j < circuitNodes.length; j++) {
+                    const dx = circuitNodes[i].x - circuitNodes[j].x;
+                    const dy = circuitNodes[i].y - circuitNodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 180) {
+                        circuitCtx.globalAlpha = (1 - dist / 180) * 0.6;
+                        circuitCtx.beginPath();
+                        circuitCtx.moveTo(circuitNodes[i].x, circuitNodes[i].y);
+                        circuitCtx.lineTo(circuitNodes[j].x, circuitNodes[j].y);
+                        circuitCtx.stroke();
+                    }
+                }
+            }
+            
+            // Draw nodes
+            circuitNodes.forEach(node => {
+                circuitCtx.globalAlpha = 0.7;
+                circuitCtx.fillStyle = Math.random() > 0.5 ? '#0066FF' : '#00C853';
+                circuitCtx.beginPath();
+                circuitCtx.arc(node.x, node.y, 3, 0, Math.PI * 2);
+                circuitCtx.fill();
+                
+                // Update position
+                node.x += node.vx; 
+                node.y += node.vy;
+                if (node.x < 0 || node.x > window.innerWidth) node.vx *= -1;
+                if (node.y < 0 || node.y > window.innerHeight) node.vy *= -1;
+            });
+            circuitCtx.globalAlpha = 1;
+            requestAnimationFrame(drawCircuit);
+        }
+        drawCircuit();
+        
+        // Stock Wave Animation
+        const stockCanvas = document.getElementById('stockCanvas');
+        const stockCtx = stockCanvas.getContext('2d');
+        function resizeStock() { stockCanvas.width = window.innerWidth; stockCanvas.height = window.innerHeight; }
+        resizeStock(); window.addEventListener('resize', resizeStock);
+        
+        let stockOffset = 0;
+        function drawStockWave() {
+            stockCtx.clearRect(0, 0, stockCanvas.width, stockCanvas.height);
+            stockCtx.beginPath();
+            stockCtx.moveTo(0, stockCanvas.height);
+            for (let x = 0; x <= stockCanvas.width; x += 5) {
+                const y = stockCanvas.height / 2 + 
+                    Math.sin((x + stockOffset) * 0.015) * 60 + 
+                    Math.sin((x + stockOffset) * 0.008) * 40 +
+                    Math.sin((x + stockOffset) * 0.003) * 20;
+                stockCtx.lineTo(x, y);
+            }
+            stockCtx.lineTo(stockCanvas.width, stockCanvas.height);
+            stockCtx.closePath();
+            const gradient = stockCtx.createLinearGradient(0, 0, 0, stockCanvas.height);
+            gradient.addColorStop(0, 'rgba(0, 102, 255, 0.25)');
+            gradient.addColorStop(0.5, 'rgba(0, 200, 83, 0.15)');
+            gradient.addColorStop(1, 'rgba(0, 102, 255, 0.1)');
+            stockCtx.fillStyle = gradient;
+            stockCtx.fill();
+            stockOffset += 1;
+            requestAnimationFrame(drawStockWave);
+        }
+        drawStockWave();
+        
+        // Enhanced Particle System
+        const particleCanvas = document.getElementById('particleCanvas');
+        const particleCtx = particleCanvas.getContext('2d');
+        function resizeParticle() { particleCanvas.width = window.innerWidth; particleCanvas.height = window.innerHeight; }
+        resizeParticle(); window.addEventListener('resize', resizeParticle);
+        
+        const particles = [];
+        for (let i = 0; i < 100; i++) {
+            particles.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                size: Math.random() * 2.5 + 0.5,
+                color: Math.random() > 0.5 ? '#0066FF' : '#00C853',
+                alpha: Math.random() * 0.5 + 0.2
+            });
+        }
+        
+        function drawParticles() {
+            particleCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+            particles.forEach(p => {
+                particleCtx.globalAlpha = p.alpha;
+                particleCtx.fillStyle = p.color;
+                particleCtx.beginPath();
+                particleCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                particleCtx.fill();
+                p.x += p.vx; 
+                p.y += p.vy;
+                if (p.x < 0) p.x = window.innerWidth;
+                if (p.x > window.innerWidth) p.x = 0;
+                if (p.y < 0) p.y = window.innerHeight;
+                if (p.y > window.innerHeight) p.y = 0;
+            });
+            particleCtx.globalAlpha = 1;
+            requestAnimationFrame(drawParticles);
+        }
+        drawParticles();
+        
+        // Stock Ticker Data & Animation
+        const tickerData = [
+            { symbol: 'S&P 500', price: 5234.18, change: 15.42 },
+            { symbol: 'NASDAQ', price: 16428.82, change: -23.56 },
+            { symbol: 'DOW', price: 39127.14, change: 89.32 },
+            { symbol: 'BTC/USD', price: 67845.00, change: 1256.50 },
+            { symbol: 'ETH/USD', price: 3524.67, change: 78.23 },
+            { symbol: 'EUR/USD', price: 1.0842, change: -0.0023 },
+            { symbol: 'GOLD', price: 2345.80, change: 12.40 },
+            { symbol: 'OIL', price: 83.25, change: -0.58 },
+        ];
+        
+        function updateTicker() {
+            const tickerWrap = document.getElementById('ticker');
+            if (!tickerWrap) return;
+            
+            // Update values randomly
+            tickerData.forEach(stock => {
+                stock.price += (Math.random() - 0.5) * (stock.price * 0.002);
+                stock.change += (Math.random() - 0.5) * 0.5;
+            });
+            
+            const tickerContent = tickerData.map(stock => {
+                const cls = stock.change >= 0 ? 'ticker-up' : 'ticker-down';
+                const sign = stock.change >= 0 ? '▲ +' : '▼ ';
+                const priceStr = stock.price < 10 ? stock.price.toFixed(4) : stock.price.toFixed(2);
+                const changeStr = Math.abs(stock.change).toFixed(2);
+                return `<span class="ticker-item ${cls}">${stock.symbol}: $${priceStr} (${sign}${changeStr})</span>`;
+            }).join('');
+            
+            tickerWrap.innerHTML = tickerContent + tickerContent;
+        }
+        
+        updateTicker();
+        setInterval(updateTicker, 2000);
+    </script>
+</body>
+</html>

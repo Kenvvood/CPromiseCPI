@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CProCPI — 稳健套利 · 智能量化 · 财富共赢</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        'gold-light': '#F5E6A3',
+                        'dark-bg': '#0A0E17',
+                        'card-bg': '#111827',
+                        'accent-green': '#10B981',
+                        'accent-blue': '#3B82F6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: Inter, system-ui, sans-serif; background: linear-gradient(135deg, #0A0E17 0%, #1a1f2e 50%, #0A0E17 100%); }
+        .gold-gradient { background: linear-gradient(135deg, #D4AF37 0%, #F5E6A3 50%, #D4AF37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15); }
+        .glow-button { box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); }
+        .glow-button:hover { box-shadow: 0 0 50px rgba(212, 175, 55, 0.6); transform: scale(1.05); }
+        .float-animation { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .gradient-border { position: relative; }
+        .gradient-border::before { content: ''; position: absolute; inset: 0; padding: 2px; background: linear-gradient(135deg, #D4AF37, #F5E6A3, #D4AF37); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; border-radius: inherit; }
+    </style>
+</head>
+<body class="min-h-screen text-gray-100">
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-yellow-500 rounded-full opacity-20 float-animation"></div>
+        <div class="absolute top-1/3 right-1/4 w-3 h-3 bg-yellow-500 rounded-full opacity-15 float-animation" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-1/4 left-1/3 w-2 h-2 bg-yellow-500 rounded-full opacity-25 float-animation" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center px-4 py-20">
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/30 mb-8">
+                <span class="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+                <span class="text-yellow-500 text-sm font-medium tracking-wide">CProCPI 智能量化生态</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
+                <span class="gold-gradient">稳健套利</span><br>
+                <span class="text-white">开启财富新纪元</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+                汇聚全球顶尖量化交易策略 · EA 智能脚本 · Berta 交易系统<br>
+                <span class="text-yellow-500 font-semibold">让资本在波动中稳定增值</span>
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#strategy" class="glow-button px-8 py-4 bg-gradient-to-r from-yellow-500 to-yellow-400 text-gray-900 font-bold text-lg rounded-xl">探索投资策略</a>
+                <a href="#ai-project" class="px-8 py-4 border-2 border-yellow-500/50 text-yellow-500 font-semibold text-lg rounded-xl hover:bg-yellow-500/10 transition-all">智能量化项目</a>
+            </div>
+            <div class="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
+                <div class="text-center"><div class="text-3xl md:text-4xl font-bold gold-gradient">98.7%</div><div class="text-gray-500 text-sm mt-1">策略执行准确率</div></div>
+                <div class="text-center"><div class="text-3xl md:text-4xl font-bold gold-gradient">24/7</div><div class="text-gray-500 text-sm mt-1">全自动无人值守</div></div>
+                <div class="text-center"><div class="text-3xl md:text-4xl font-bold gold-gradient">500+</div><div class="text-gray-500 text-sm mt-1">成功签约合伙人</div></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Social Proof Section -->
+    <section class="py-20 px-4 bg-gradient-to-b from-transparent via-yellow-500/5 to-transparent">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">信任见证 · 实力说话</h2>
+                <p class="text-gray-400">来自真实用户的收益反馈与合作成果</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="gradient-border rounded-2xl bg-gray-900/80 p-8 card-hover">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-2xl">+</div>
+                        <div><div class="text-2xl font-bold text-green-500">月均收益 5%+</div><div class="text-gray-400 text-sm">客户实盘反馈</div></div>
+                    </div>
+                    <div class="bg-gray-800/50 rounded-xl border-2 border-dashed border-gray-600 aspect-video flex items-center justify-center">
+                        <p class="text-gray-500">【客户实盘截图上传区】</p>
+                    </div>
+                </div>
+                <div class="gradient-border rounded-2xl bg-gray-900/80 p-8 card-hover">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-yellow-500 to-yellow-400 flex items-center justify-center text-2xl">3</div>
+                        <div><div class="text-2xl font-bold gold-gradient">3位合伙人</div><div class="text-gray-400 text-sm">单周成功签约</div></div>
+                    </div>
+                    <div class="bg-gray-800/50 rounded-xl border-2 border-dashed border-gray-600 aspect-video flex items-center justify-center">
+                        <p class="text-gray-500">【签约现场照片上传区】</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stable Arbitrage Strategy Section -->
+    <section id="strategy" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 rounded-full bg-yellow-500/10 text-yellow-500 text-sm font-medium mb-4">核心策略</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">稳健套利项目</h2>
+                <p class="text-xl text-gray-400"><span class="text-yellow-500 font-bold">15,800</span> 项目费 · 一次付费 · 终身受益</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 border border-yellow-500/20 mb-12">
+                <div class="flex flex-col lg:flex-row gap-12 items-center">
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-white mb-6">为什么选择稳健套利？</h3>
+                        <p class="text-gray-300 leading-relaxed mb-8">在外汇黄金市场波动中寻找确定性收益机会。通过跨平台点差对冲、无赠金对冲等量化策略，实现<span class="text-yellow-500 font-semibold">低风险稳定回报</span>。适合追求资产稳健增值的投资者。</p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-yellow-500/10 text-yellow-500 rounded-full text-sm font-medium">本金安全优先</span>
+                            <span class="px-4 py-2 bg-green-500/10 text-green-500 rounded-full text-sm font-medium">量化自动执行</span>
+                            <span class="px-4 py-2 bg-blue-500/10 text-blue-500 rounded-full text-sm font-medium">专业团队支持</span>
+                        </div>
+                    </div>
+                    <div class="lg:w-80 flex-shrink-0">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-yellow-500/20 rounded-2xl blur-xl"></div>
+                            <div class="relative bg-gradient-to-br from-yellow-500/20 to-yellow-400/10 rounded-2xl p-8 text-center border border-yellow-500/30">
+                                <div class="text-sm text-gray-400 mb-2">项目合作费</div>
+                                <div class="text-5xl font-black gold-gradient mb-2">15,800</div>
+                                <div class="text-gray-500 text-sm">包含策略 + 工具 + 培训</div>
+                                <a href="#contact" class="mt-6 block w-full py-3 bg-yellow-500 text-gray-900 font-bold rounded-xl hover:bg-yellow-400 transition-all">立即咨询</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-white text-center mb-8">四大核心策略体系</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gray-900/50 rounded-2xl p-6 border border-yellow-500/10 card-hover text-center">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 flex items-center justify-center text-2xl">1</div>
+                    <h4 class="text-lg font-bold text-white mb-2">无赠金对冲</h4>
+                    <p class="text-gray-400 text-sm">规避赠金陷阱，纯本金操作，资金安全与收益双保障</p>
+                </div>
+                <div class="bg-gray-900/50 rounded-2xl p-6 border border-yellow-500/10 card-hover text-center">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center text-2xl">2</div>
+                    <h4 class="text-lg font-bold text-white mb-2">跨平台点差套利</h4>
+                    <p class="text-gray-400 text-sm">捕捉多平台点差差异，自动化执行，稳稳吃利差</p>
+                </div>
+                <div class="bg-gray-900/50 rounded-2xl p-6 border border-yellow-500/10 card-hover text-center">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center text-2xl">3</div>
+                    <h4 class="text-lg font-bold text-white mb-2">EA 智能脚本</h4>
+                    <p class="text-gray-400 text-sm">自主研发 EA 程序，7x24 小时无人值守，自动捕捉机会</p>
+                </div>
+                <div class="bg-gray-900/50 rounded-2xl p-6 border border-yellow-500/10 card-hover text-center">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-green-500/20 to-teal-500/20 flex items-center justify-center text-2xl">4</div>
+                    <h4 class="text-lg font-bold text-white mb-2">Berta 交易工具</h4>
+                    <p class="text-gray-400 text-sm">Berta 智能交易系统，机器学习优化策略，持续进化</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Quantitative Project Section -->
+    <section id="ai-project" class="py-20 px-4 bg-gradient-to-b from-transparent via-green-500/5 to-transparent">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 rounded-full bg-green-500/10 text-green-500 text-sm font-medium mb-4">重磅推出</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">智能量化项目</h2>
+                <p class="text-xl text-gray-400"><span class="text-green-500 font-bold">50% 利润分成</span> · 你盈利我分成 · 风险共担</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4 p-6 bg-gray-900/50 rounded-2xl border border-green-500/20 card-hover">
+                        <div class="w-12 h-12 flex-shrink-0 rounded-xl bg-green-500/20 flex items-center justify-center text-xl text-green-500">1</div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1">您提供交易账户</h4>
+                            <p class="text-gray-400 text-sm">最低入金 2,000 USDT 或等值资金</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-6 bg-gray-900/50 rounded-2xl border border-green-500/20 card-hover">
+                        <div class="w-12 h-12 flex-shrink-0 rounded-xl bg-green-500/20 flex items-center justify-center text-xl text-green-500">2</div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1">我们提供 EA 系统</h4>
+                            <p class="text-gray-400 text-sm">MT4/MT5 全自动运行，24小时智能交易</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-6 bg-gray-900/50 rounded-2xl border border-green-500/20 card-hover">
+                        <div class="w-12 h-12 flex-shrink-0 rounded-xl bg-green-500/20 flex items-center justify-center text-xl text-green-500">3</div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1">利润五五分成</h4>
+                            <p class="text-gray-400 text-sm">每月结算，透明公开，数据可查</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-3xl p-8 border border-green-500/30 text-center">
+                    <div class="text-sm text-gray-400 mb-2">EA 月均收益率目标</div>
+                    <div class="text-6xl font-black text-green-500 mb-4">8-15%</div>
+                    <div class="text-gray-500 text-sm mb-8">历史数据仅供参考，投资有风险</div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-4 bg-gray-900/50 rounded-xl">
+                            <span class="text-gray-400">您获得</span>
+                            <span class="text-2xl font-bold text-green-500">50%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-gray-900/50 rounded-xl">
+                            <span class="text-gray-400">团队获得</span>
+                            <span class="text-2xl font-bold text-gray-300">50%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">开启合作之旅</h2>
+                <p class="text-xl text-gray-400">选择适合您的合作模式，扫码联系咨询</p>
+            </div>
+            <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 border border-yellow-500/20 text-center">
+                <h3 class="text-2xl font-bold text-white mb-6">扫码添加微信</h3>
+                <p class="text-gray-400 mb-8">备注"量化合作"，第一时间获得项目详情</p>
+                <div class="inline-block p-6 bg-white rounded-2xl mb-8">
+                    <div class="w-48 h-48 bg-gray-100 flex items-center justify-center rounded-lg">
+                        <p class="text-gray-400 text-sm">微信二维码</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#" class="glow-button px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-lg rounded-xl">添加微信咨询</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-yellow-400 rounded-lg flex items-center justify-center">
+                        <span class="text-gray-900 font-bold">C</span>
+                    </div>
+                    <span class="text-xl font-bold gold-gradient">CProCPI</span>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-gray-500 text-sm">2025 CProCPI 智能量化生态</p>
+                    <p class="text-gray-600 text-xs mt-2">免责声明：投资有风险，入市需谨慎</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener("click", function(e) {
+                e.preventDefault();
+                const t = document.querySelector(this.getAttribute("href"));
+                if (t) {
+                    t.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
