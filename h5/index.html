@@ -1093,83 +1093,133 @@
     <!-- 客户好评 Section -->
     <section class="py-16 px-6">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-8">
+            <div class="text-center mb-8 overflow-hidden">
                 <span class="text-brand-green font-medium mb-4 block tracking-widest">REVIEWS</span>
                 <h2 class="section-title-enhanced">盈利分享 · 客户心声</h2>
                 <p class="text-gray-400 mt-4">真实反馈，彰显实力</p>
             </div>
 
-            <!-- 方案四：数字+截图组合 - 紧凑版 -->
-            <div class="flex gap-4 overflow-x-auto pb-4 scroll-smooth" style="scroll-snap-type: x mandatory;">
-                <!-- 卡片1 -->
-                <div class="flex-shrink-0 w-72 h-28 bg-[#1a1a2e] border border-amber-400/30 rounded-xl p-4 flex items-center gap-4 scroll-snap-align-start" style="min-height: 112px;">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-bold flex-shrink-0">张</div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-center justify-between">
-                            <span class="text-white font-medium text-sm">张先生</span>
-                            <span class="text-brand-green text-xs font-bold">+36.8%</span>
+            <!-- 轮播卡片 -->
+            <div class="relative max-w-lg mx-auto">
+                <!-- 轮播容器 -->
+                <div id="reviewSlider" class="overflow-hidden rounded-xl">
+                    <div id="reviewTrack" class="flex transition-transform duration-300 ease-out">
+                        <!-- 卡片1 -->
+                        <div class="w-full flex-shrink-0 p-2">
+                            <div class="bg-[#1a1a2e] border border-amber-400/30 rounded-xl p-4 flex items-center gap-4" style="height: 100px;">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-bold flex-shrink-0">张</div>
+                                <div class="flex-1 min-w-0 flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-white font-medium text-sm">张先生</span>
+                                            <span class="text-brand-green text-xs font-bold">+36.8%</span>
+                                        </div>
+                                        <div class="text-xl font-black text-amber-400">¥128,500</div>
+                                    </div>
+                                    <div class="w-12 h-16 rounded-lg overflow-hidden border border-gray-700 flex-shrink-0">
+                                        <img src="images/feedback/feedback-01.jpg" alt="截图" class="w-full h-full object-cover">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="text-xl font-black text-amber-400 mt-1">¥128,500</div>
-                        <div class="text-gray-500 text-xs mt-1 truncate">客户：张先生 · 跟随2年</div>
-                    </div>
-                    <div class="w-12 h-16 rounded-lg overflow-hidden border border-gray-700 flex-shrink-0">
-                        <img src="images/feedback/feedback-01.jpg" alt="截图" class="w-full h-full object-cover">
+                        <!-- 卡片2 -->
+                        <div class="w-full flex-shrink-0 p-2">
+                            <div class="bg-[#1a1a2e] border border-brand-green/30 rounded-xl p-4 flex items-center gap-4" style="height: 100px;">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-green to-teal-500 flex items-center justify-center text-white font-bold flex-shrink-0">李</div>
+                                <div class="flex-1 min-w-0 flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-white font-medium text-sm">李女士</span>
+                                            <span class="text-brand-green text-xs font-bold">+25.3%</span>
+                                        </div>
+                                        <div class="text-xl font-black text-brand-green">¥86,200</div>
+                                    </div>
+                                    <div class="w-12 h-16 rounded-lg overflow-hidden border border-gray-700 flex-shrink-0">
+                                        <img src="images/feedback/feedback-02.jpg" alt="截图" class="w-full h-full object-cover">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 卡片3 -->
+                        <div class="w-full flex-shrink-0 p-2">
+                            <div class="bg-[#1a1a2e] border border-brand-blue/30 rounded-xl p-4 flex items-center gap-4" style="height: 100px;">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-blue to-purple-600 flex items-center justify-center text-white font-bold flex-shrink-0">王</div>
+                                <div class="flex-1 min-w-0 flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-white font-medium text-sm">王先生</span>
+                                            <span class="text-brand-green text-xs font-bold">+42.1%</span>
+                                        </div>
+                                        <div class="text-xl font-black text-brand-blue">¥156,800</div>
+                                    </div>
+                                    <div class="w-12 h-16 rounded-lg overflow-hidden border border-gray-700 flex-shrink-0">
+                                        <img src="images/feedback/feedback-03.jpg" alt="截图" class="w-full h-full object-cover">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 卡片4 -->
+                        <div class="w-full flex-shrink-0 p-2">
+                            <div class="bg-[#1a1a2e] border border-purple-500/30 rounded-xl p-4 flex items-center gap-4" style="height: 100px;">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white font-bold flex-shrink-0">陈</div>
+                                <div class="flex-1 min-w-0 flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-white font-medium text-sm">陈先生</span>
+                                            <span class="text-brand-green text-xs font-bold">+18.5%</span>
+                                        </div>
+                                        <div class="text-xl font-black text-purple-400">¥52,300</div>
+                                    </div>
+                                    <div class="w-12 h-16 rounded-lg overflow-hidden border border-gray-700 flex-shrink-0">
+                                        <img src="images/feedback/feedback-04.jpg" alt="截图" class="w-full h-full object-cover">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 卡片2 -->
-                <div class="flex-shrink-0 w-72 h-28 bg-[#1a1a2e] border border-brand-green/30 rounded-xl p-4 flex items-center gap-4 scroll-snap-align-start" style="min-height: 112px;">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-green to-teal-500 flex items-center justify-center text-white font-bold flex-shrink-0">李</div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-center justify-between">
-                            <span class="text-white font-medium text-sm">李女士</span>
-                            <span class="text-brand-green text-xs font-bold">+25.3%</span>
-                        </div>
-                        <div class="text-xl font-black text-brand-green mt-1">¥86,200</div>
-                        <div class="text-gray-500 text-xs mt-1 truncate">客户：李女士 · 跟随1年</div>
-                    </div>
-                    <div class="w-12 h-16 rounded-lg overflow-hidden border border-gray-700 flex-shrink-0">
-                        <img src="images/feedback/feedback-02.jpg" alt="截图" class="w-full h-full object-cover">
-                    </div>
-                </div>
-
-                <!-- 卡片3 -->
-                <div class="flex-shrink-0 w-72 h-28 bg-[#1a1a2e] border border-brand-blue/30 rounded-xl p-4 flex items-center gap-4 scroll-snap-align-start" style="min-height: 112px;">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-purple-600 flex items-center justify-center text-white font-bold flex-shrink-0">王</div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-center justify-between">
-                            <span class="text-white font-medium text-sm">王先生</span>
-                            <span class="text-brand-green text-xs font-bold">+42.1%</span>
-                        </div>
-                        <div class="text-xl font-black text-brand-blue mt-1">¥156,800</div>
-                        <div class="text-gray-500 text-xs mt-1 truncate">客户：王先生 · 跟随3年</div>
-                    </div>
-                    <div class="w-12 h-16 rounded-lg overflow-hidden border border-gray-700 flex-shrink-0">
-                        <img src="images/feedback/feedback-03.jpg" alt="截图" class="w-full h-full object-cover">
-                    </div>
-                </div>
-
-                <!-- 卡片4 -->
-                <div class="flex-shrink-0 w-72 h-28 bg-[#1a1a2e] border border-purple-500/30 rounded-xl p-4 flex items-center gap-4 scroll-snap-align-start" style="min-height: 112px;">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white font-bold flex-shrink-0">陈</div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-center justify-between">
-                            <span class="text-white font-medium text-sm">陈先生</span>
-                            <span class="text-brand-green text-xs font-bold">+18.5%</span>
-                        </div>
-                        <div class="text-xl font-black text-purple-400 mt-1">¥52,300</div>
-                        <div class="text-gray-500 text-xs mt-1 truncate">客户：陈先生 · 跟随8个月</div>
-                    </div>
-                    <div class="w-12 h-16 rounded-lg overflow-hidden border border-gray-700 flex-shrink-0">
-                        <img src="images/feedback/feedback-04.jpg" alt="截图" class="w-full h-full object-cover">
-                    </div>
-                </div>
+                <!-- 左右箭头 -->
+                <button onclick="slideReview(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center" style="background: rgba(0,200,83,0.2); color: #00C853; margin-left: -20px;">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button onclick="slideReview(1)" class="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center" style="background: rgba(0,200,83,0.2); color: #00C853; margin-right: -20px;">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
             </div>
-            <div class="text-center mt-4">
-                <p class="text-gray-500 text-sm">← 左右滑动查看更多客户反馈 →</p>
+
+            <!-- 指示器 -->
+            <div class="flex justify-center gap-2 mt-6">
+                <span class="review-dot w-2 h-2 rounded-full transition-all" style="background: #00C853;"></span>
+                <span class="review-dot w-2 h-2 rounded-full transition-all" style="background: rgba(0,200,83,0.3);"></span>
+                <span class="review-dot w-2 h-2 rounded-full transition-all" style="background: rgba(0,200,83,0.3);"></span>
+                <span class="review-dot w-2 h-2 rounded-full transition-all" style="background: rgba(0,200,83,0.3);"></span>
             </div>
         </div>
     </section>
+
+    <script>
+    var reviewCurrentSlide = 0;
+    var reviewTotalSlides = 4;
+
+    function slideReview(direction) {
+        reviewCurrentSlide += direction;
+        if (reviewCurrentSlide < 0) reviewCurrentSlide = reviewTotalSlides - 1;
+        if (reviewCurrentSlide >= reviewTotalSlides) reviewCurrentSlide = 0;
+        updateReviewSlider();
+    }
+
+    function updateReviewSlider() {
+        var track = document.getElementById('reviewTrack');
+        var dots = document.querySelectorAll('.review-dot');
+        if (track) {
+            track.style.transform = 'translateX(-' + (reviewCurrentSlide * 100) + '%)';
+        }
+        dots.forEach(function(dot, i) {
+            dot.style.background = i === reviewCurrentSlide ? '#00C853' : 'rgba(0,200,83,0.3)';
+        });
+    }
+    </script>
 
     <!-- 灯箱 -->
     <div id="lightbox" class="lightbox">
